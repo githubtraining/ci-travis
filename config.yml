@@ -284,7 +284,8 @@ steps:
   - type: mergeBranch
     head: add-a-link
     base: add-links
-    action_id: branchWithLink
+    store: 
+      branchWithLink: '{{ result.data.sha }}'
 
   # tells the learner to fix the broken link
   - type: respond
@@ -296,7 +297,7 @@ steps:
     owner: '%payload.repository.owner.login%'
     repo: '%payload.repository.name%'
     number: '%payload.pull_request.number%'
-    commit_id: '%actions.branchWithLink.data.sha%'
+    commit_id: '{{ store.branchWithLink }}'
     path: index.md
     body: |
       ```suggestion
